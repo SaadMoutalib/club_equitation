@@ -18,17 +18,17 @@ db.seances = require("../models/seance.model")(sequelize);
 db.tasks = require("../models/task.model")(sequelize);
 db.users = require("../models/user.model")(sequelize);
 
-db.user.hasMany(db.seance, {
+db.users.hasMany(db.seances, {
     as: "seances",
     foreignKey: "Monitor"
 });
 
-db.user.hasMany(db.task, {
+db.users.hasMany(db.tasks, {
     as: "tasks",
     foreignKey: "User"
 });
 
-db.client.hasMany(db.seance, {
+db.clients.hasMany(db.seances, {
     as: "seances",
     foreignKey: "Client"
 });

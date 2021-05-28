@@ -55,7 +55,7 @@ exports.create = (req, res) => {
 exports.findOne = (req, res) => {
     const id = req.params.id;
 
-    Seance.findByPk(id)
+    Seance.findByPk(id, {include:db.clients})
     .then((data) => {
         res.status(200).send(data);
     })
@@ -66,9 +66,9 @@ exports.findOne = (req, res) => {
     });
 };
   
-  exports.update = (req, res) => {
+exports.update = (req, res) => {
     Seance.update(req.body, {
-      where: { _id: req.params.id },
+        where: { _id: req.params.id },
     })
     .then((data) => {
         res.status(200).send(data);
@@ -80,22 +80,22 @@ exports.findOne = (req, res) => {
     });
 };
   
-  exports.delete = (req, res) => {
+exports.delete = (req, res) => {
     Seance.destroy({
-      where: {
+        where: {
         _id: req.params.id,
-      },
-      truncate: false,
+        },
+        truncate: false,
     })
     .then((data) => {
-    res.status(200).send({
-        message: "Seance deleted succesfully",
-    });
+        res.status(200).send({
+            message: "Seance deleted succesfully",
+        });
     })
     .catch((err) => {
-    res.status(500).send({
-        message: "Error deleting seance with id = "+req.params.id+"\n error : "+err,
-    });
+        res.status(500).send({
+            message: "Error deleting seance with id = "+req.params.id+"\n error : "+err,
+        });
     });
 };
   

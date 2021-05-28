@@ -37,11 +37,11 @@ module.exports = (sequelize) => {
     }
   };
   const options = {
-    tableName: "Seance",
+    tableName: "Task",
     comment: "",
     indexes: [],
   };
-  const SeanceModel = sequelize.define("seance_model", attributes, options);
+  const TaskModel = sequelize.define("task_model", attributes, options);
 
-  return SeanceModel;
+  return TaskModel;
 };

@@ -1,10 +1,12 @@
 const db = require("../config/db");
-
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const config = require("../config/auth.config.js");
 const User = db.users;
 
 exports.login = (req, res) => {
     User.findOne({
-      where: { userEmail: req.body.email },
+      where: { userEmail: req.body.userEmail },
     })
     .then((data) => {
         if (!data) {
@@ -12,7 +14,7 @@ exports.login = (req, res) => {
             message: "Il n'existe aucun compte avec cet email",
             });
         } else {
-            const result = bcrypt.compareSync(req.body.password, data.password);
+            const result = bcrypt.compareSync(req.body.userPasswd, data.userPasswd);
             data.password = undefined;
             if (result) {
             const jsontoken = jwt.sign({ id: data._id }, config.secret, {
@@ -45,7 +47,6 @@ exports.create = (req, res) => {
       !req.body.userLName ||
       !req.body.description ||
       !req.body.userType ||
-      !req.body.userphoto ||
       !req.body.contractDate||
       !req.body.userPhone||
       !req.body.displayColor
@@ -54,33 +55,57 @@ exports.create = (req, res) => {
         message: "No field should be empty !",
       });
     }
-  
-    const user = {
-        userEmail:req.body.userEmail,
-        userPasswd:req.body.userPasswd,
-        userFName:req.body.userFName,
-        userLName:req.body.userLName ,
-        description:req.body.description ,
-        userType:req.body.userType,
-        userphoto:req.body.userphoto ,
-        contractDate:req.body.contractDate,
-        userPhone:req.body.userPhone,
-        displayColor:req.body.displayColor
-    };
-  
-    User.create(user)
-    .then((data) => {
-        return res.status(200).send({
-            success: 1,
-            message: "User created successfuly",
-            annonce: data,
-        });
+
+    Client.findOne({
+        where: { userEmail: req.body.userEmail },
+      })
+        .then((data) => {
+          if (data) {
+            return res.status(400).send({
+              message: "Un utilisateur avec cet e-mail existe deja",
+            });
+          } else {
+            const salt = bcrypt.genSaltSync(10);
+            
+            const user = {
+                userEmail:req.body.userEmail,
+                userPasswd:bcrypt.hashSync(req.body.userPasswd, salt),
+                userFName:req.body.userFName,
+                userLName:req.body.userLName,
+                description:req.body.description,
+                userType:req.body.userType,
+                contractDate:req.body.contractDate,
+                userPhone:req.body.userPhone,
+                displayColor:req.body.displayColor
+            };
+
+            if(req.file){
+                const url = req.protocol + "://" + req.get("host");
+                const image = url + "/public/user/" + req.file.filename;
+                
+                user.userphoto = image;
+            }
+            
+            User.create(user)
+            .then((data) => {
+                return res.status(200).send({
+                    success: 1,
+                    message: "User created successfuly",
+                    annonce: data,
+                })
+            })
+            .catch((err) => {
+                res.status(500).send({
+                    message: err.message,
+                });
+            });
+          }
         })
-    .catch((err) => {
-        res.status(500).send({
+        .catch((err) => {
+          res.status(400).send({
             message: err.message,
+          });
         });
-    });
 };
 
 exports.findAll = (req, res) => {
@@ -98,7 +123,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
     const id = req.params.id;
 
-    User.findByPk(id)
+    User.findByPk(id,{include:[{model:db.seances, as:"seances"},{model:db.tasks, as:"tasks"}]})
     .then((data) => {
         res.status(200).send(data);
     })

@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
     },
     sessionToken: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       field: "sessionToken",
     },
     fName: {

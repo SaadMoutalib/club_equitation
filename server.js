@@ -21,13 +21,13 @@ app.use(cors());
 app.use(morgan("dev"));
 
 db.sequelize.sync({
-  //force: true,
+ // force: true,
 });
 
-require("./api/routes/user.routes")(app);
-require("./api/routes/client.routes")(app);
-require("./api/routes/task.routes")(app);
-require("./api/routes/seance.routes")(app);
+require("./routes/user.routes")(app);
+require("./routes/client.routes")(app);
+require("./routes/task.routes")(app);
+require("./routes/seance.routes")(app);
 
 app.listen(process.env.PORT || 3000, () =>
     console.log('Server started ...')
