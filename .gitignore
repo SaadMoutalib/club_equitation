@@ -45,6 +45,9 @@ jspm_packages/
 #public directory content
 public/client/*
 public/user/*
+!public/client/default.jpg
+!public/user/default.jpg
+
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
