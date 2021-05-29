@@ -75,7 +75,6 @@ exports.create = (req, res) => {
                 fName:req.body.fName,
                 lName:req.body.lName,
                 birthDate:req.body.birthDate,
-                birthDate:req.body.photo,
                 identityDoc:req.body.identityDoc,
                 identityNumber:req.body.identityNumber,
                 inscriptionDate:req.body.inscriptionDate,
