@@ -1,11 +1,10 @@
 const Sequelize = require("sequelize");
 const dbConfig = require("../config/db.config.js");
 
-const sequelize = new Sequelize(process.env.DATABASE_URL|| dbConfig.URL,
+const sequelize = new Sequelize((process.env.DATABASE_URL|| dbConfig.URL)+"?sslmode=require",
  {
   host: dbConfig.HOST,
   dialect: dbConfig.dialect,
-  ssl: true,
   define: {
     timestamps: false,
   },
