@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require("cors");
 const morgan = require("morgan");
-const db = require("./config/db");
+const db = require("./models/db");
 const dotenv = require("dotenv");
 
 dotenv.config({ path: "./config/config.env" });
@@ -29,7 +29,9 @@ require("./routes/client.routes")(app);
 require("./routes/task.routes")(app);
 require("./routes/seance.routes")(app);
 
-app.listen(process.env.PORT || 3000, () =>
-    console.log('Server started ...')
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () =>
+    console.log(`Server started on PORT ${PORT}...`)
 )
 

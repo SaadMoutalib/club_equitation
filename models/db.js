@@ -1,11 +1,12 @@
 const Sequelize = require("sequelize");
+const dbConfig = require("../config/db.config.js");
 
-const sequelize = new Sequelize("clubEquitation", "root", "naruto$@1996", {
-  host: "localhost",
-  dialect: "mysql",
+const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
+  host: dbConfig.HOST,
+  dialect: dbConfig.dialect,
   define: {
     timestamps: false,
-  },
+  }
 });
 
 const db = {};
@@ -13,10 +14,10 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.clients = require("../models/client.model")(sequelize);
-db.seances = require("../models/seance.model")(sequelize);
-db.tasks = require("../models/task.model")(sequelize);
-db.users = require("../models/user.model")(sequelize);
+db.clients = require("./client.model")(sequelize);
+db.seances = require("./seance.model")(sequelize);
+db.tasks = require("./task.model")(sequelize);
+db.users = require("./user.model")(sequelize);
 
 db.users.hasMany(db.seances, {
     as: "seances",

@@ -1,4 +1,4 @@
-const db = require("../config/db");
+const db = require("../models/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const config = require("../config/auth.config.js");
