@@ -19,13 +19,13 @@ module.exports = (sequelize) => {
         field: "startDate",
     },
     durationMinut: {
-        type: DataTypes.TINYINT,
+        type: DataTypes.SMALLINT,
         allowNull: false,
         defaultValue: 120,
         field: "durationMinut",
     },
     isDone: {
-        type: DataTypes.TINYINT,
+        type: DataTypes.SMALLINT,
         allowNull: false,
         defaultValue: 0,
         field: "isDone",

@@ -4,7 +4,7 @@ const morgan = require("morgan");
 const db = require("./models/db");
 const dotenv = require("dotenv");
 
-dotenv.config({ path: "./config/config.env" });
+dotenv.config();
 
 const app = express();
 
@@ -21,7 +21,7 @@ app.use(cors());
 app.use(morgan("dev"));
 
 db.sequelize.sync({
- // force: true,
+  //force: true,
 });
 
 require("./routes/user.routes")(app);

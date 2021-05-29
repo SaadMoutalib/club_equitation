@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
       field: "startDate",
     },
     durationMinut: {
-        type: DataTypes.TINYINT,
+        type: DataTypes.SMALLINT,
         allowNull: false,
         defaultValue: 60,
         field: "durationMinut",
@@ -32,7 +32,6 @@ module.exports = (sequelize) => {
     isDone: {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: '0000-00-00 00:00:00',
         field: "isDone",
     }
   };

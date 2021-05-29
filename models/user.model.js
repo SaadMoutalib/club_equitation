@@ -24,7 +24,7 @@ module.exports = (sequelize) => {
         field: "userPasswd",
     },
     adminLevel: {
-    type: DataTypes.TINYINT,
+    type: DataTypes.SMALLINT,
         allowNull: false,
         field: "adminLevel",
     },
@@ -34,7 +34,7 @@ module.exports = (sequelize) => {
         field: "lastLoginTime",
     },
     isActive: {
-        type: DataTypes.TINYINT,
+        type: DataTypes.SMALLINT,
         allowNull: false,
         defaultValue: 1,
         field: "isActive",
@@ -68,7 +68,6 @@ module.exports = (sequelize) => {
     contractDate: {
     type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: '0000-00-00 00:00:00',
         field: "contractDate",
     },
     userPhone: {

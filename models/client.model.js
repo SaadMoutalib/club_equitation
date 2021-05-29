@@ -27,7 +27,6 @@ module.exports = (sequelize) => {
     birthDate: {
     type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: '1980-08-03 00:00:00',
         field: "birthDate",
     },
     photo: {
@@ -55,13 +54,11 @@ module.exports = (sequelize) => {
     ensurenceValidity: {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: '0000-00-00 00:00:00',
         field: "ensurenceValidity",
     },
     licenceValidity: {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: '0000-00-00 00:00:00',
         field: "licenceValidity",
     },
     clientEmail: {
@@ -85,7 +82,7 @@ module.exports = (sequelize) => {
         field: "priceRate",
     },
     isActive: {
-        type: DataTypes.TINYINT,
+        type: DataTypes.SMALLINT,
         allowNull: false,
         defaultValue: 1,
         field: "isActive",

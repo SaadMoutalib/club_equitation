@@ -1,9 +1,10 @@
 module.exports = {
+    URL : "postgres://postgres:saad@1996@localhost:5432/clubEquitation",
     HOST: "localhost",
-    USER: "root",
-    PASSWORD: "naruto$@1996",
+    USER: "postgres",
+    PASSWORD: "saad@1996",
     DB: "clubEquitation",
-    dialect: "mysql",
+    dialect: "postgres",
     pool: {
       max: 5,
       min: 0,
