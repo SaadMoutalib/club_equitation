@@ -5,6 +5,7 @@ const sequelize = new Sequelize(process.env.DATABASE_URL|| dbConfig.URL,
  {
   host: dbConfig.HOST,
   dialect: dbConfig.dialect,
+  ssl: true,
   define: {
     timestamps: false,
   },
