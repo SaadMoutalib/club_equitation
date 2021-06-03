@@ -25,12 +25,12 @@ module.exports = (sequelize) => {
     },
     adminLevel: {
     type: DataTypes.SMALLINT,
-        allowNull: false,
+        allowNull: true,
         field: "adminLevel",
     },
     lastLoginTime: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
         field: "lastLoginTime",
     },
     isActive: {
