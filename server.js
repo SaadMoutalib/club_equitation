@@ -21,7 +21,7 @@ app.use(cors());
 app.use(morgan("dev"));
 
 db.sequelize.sync({
-  force: true,
+  //force: true,
 });
 
 require("./routes/user.routes")(app);

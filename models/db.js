@@ -28,17 +28,17 @@ db.users = require("./user.model")(sequelize);
 
 db.users.hasMany(db.seances, {
     as: "seances",
-    foreignKey: "Monitor"
+    foreignKey: "MonitorID"
 });
 
 db.users.hasMany(db.tasks, {
     as: "tasks",
-    foreignKey: "User"
+    foreignKey: "UserID"
 });
 
 db.clients.hasMany(db.seances, {
     as: "seances",
-    foreignKey: "Client"
+    foreignKey: "ClientID"
 });
 
 module.exports = db;

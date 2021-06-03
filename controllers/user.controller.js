@@ -56,7 +56,7 @@ exports.create = (req, res) => {
       });
     }
 
-    Client.findOne({
+    User.findOne({
         where: { userEmail: req.body.userEmail },
       })
         .then((data) => {

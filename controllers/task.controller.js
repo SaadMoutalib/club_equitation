@@ -20,7 +20,6 @@ exports.create = (req, res) => {
       !req.body.durationMinut ||
       !req.body.title ||
       !req.body.detail ||
-      !req.body.isDone ||
       !req.body.comments
     ) {
       return res.status(400).send({
@@ -32,8 +31,7 @@ exports.create = (req, res) => {
         startDate:req.body.startDate,
         durationMinut:req.body.durationMinut,
         title:req.body.title,
-        detail:req.body.detail,
-        isDone:req.body.isDone
+        detail:req.body.detail
     };
   
     Task.create(task)
@@ -41,7 +39,7 @@ exports.create = (req, res) => {
         return res.status(200).send({
             success: 1,
             message: "Task created successfuly",
-            annonce: data,
+            task: data,
         });
         })
     .catch((err) => {

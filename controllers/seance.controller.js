@@ -1,4 +1,5 @@
 const db = require("../models/db");
+const { Op } = require("sequelize");
 
 const Seance = db.seances;
 
@@ -14,14 +15,39 @@ exports.findAll = (req, res) => {
     });
 };
 
+exports.findClientSeance = (req, res) => {
+    Seance.findAll({
+        where: { ClientID: req.params.id }
+    }).then((data)=>{
+        res.send(data);
+    }).catch((err)=>{
+        res.status(500).send({
+            message: err.message,
+          });
+    });
+}
+
+exports.findMonitorSeance = (req, res) => {
+    Seance.findAll({
+        where: { MonitorID: req.params.id }
+    }).then((data)=>{
+        res.send(data);
+    }).catch((err)=>{
+        res.status(500).send({
+            message: err.message,
+          });
+    });
+}
+
 exports.create = (req, res) => {
     if (
       !req.body.seanceGrpID ||
       !req.body.startDate ||
       !req.body.durationMinut ||
-      !req.body.isDone ||
       !req.body.paymentID ||
-      !req.body.comments
+      !req.body.comments ||
+      !req.body.ClientID ||
+      !req.body.MonitorID 
     ) {
       return res.status(400).send({
         message: "No field should be empty !",
@@ -32,9 +58,10 @@ exports.create = (req, res) => {
         seanceGrpID:req.body.seanceGrpID,
         startDate:req.body.startDate,
         durationMinut:req.body.durationMinut,
-        isDone:req.body.isDone,
         paymentID:req.body.paymentID ,
-        comments:req.body.comments
+        comments:req.body.comments,
+        MonitorID:req.body.MonitorID,
+        ClientID:req.body.ClientID
     };
   
     Seance.create(seance)
@@ -42,7 +69,7 @@ exports.create = (req, res) => {
         return res.status(200).send({
             success: 1,
             message: "Seance created successfuly",
-            annonce: data,
+            seance: data,
         });
         })
     .catch((err) => {
