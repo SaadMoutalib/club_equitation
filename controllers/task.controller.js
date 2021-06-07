@@ -80,7 +80,7 @@ exports.findOne = (req, res) => {
   
   exports.update = (req, res) => {
     Task.update(req.body, {
-      where: { _id: req.params.id },
+      where: { taskID: req.params.id },
     })
     .then((data) => {
         res.status(200).send(data);
@@ -95,7 +95,7 @@ exports.findOne = (req, res) => {
   exports.delete = (req, res) => {
     Task.destroy({
       where: {
-        _id: req.params.id,
+        taskID: req.params.id,
       },
       truncate: false,
     })

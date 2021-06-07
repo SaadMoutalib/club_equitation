@@ -141,7 +141,7 @@ exports.findOne = (req, res) => {
   
   exports.update = (req, res) => {
     Client.update(req.body, {
-      where: { _id: req.params.id },
+      where: { clientID: req.params.id },
     })
     .then((data) => {
         res.status(200).send(data);
@@ -156,7 +156,7 @@ exports.findOne = (req, res) => {
   exports.delete = (req, res) => {
     Client.destroy({
       where: {
-        _id: req.params.id,
+        clientID: req.params.id,
       },
       truncate: false,
     })

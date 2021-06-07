@@ -136,7 +136,7 @@ exports.findOne = (req, res) => {
   
   exports.update = (req, res) => {
     User.update(req.body, {
-      where: { _id: req.params.id },
+      where: { userID: req.params.id },
     })
     .then((data) => {
         res.status(200).send(data);
@@ -151,7 +151,7 @@ exports.findOne = (req, res) => {
   exports.delete = (req, res) => {
     User.destroy({
       where: {
-        _id: req.params.id,
+        userID: req.params.id,
       },
       truncate: false,
     })

@@ -120,7 +120,7 @@ exports.findOne = (req, res) => {
   
 exports.update = (req, res) => {
     Seance.update(req.body, {
-        where: { _id: req.params.id },
+        where: { seanceID: req.params.id },
     })
     .then((data) => {
         res.status(200).send(data);
@@ -135,7 +135,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
     Seance.destroy({
         where: {
-        _id: req.params.id,
+            seanceID: req.params.id,
         },
         truncate: false,
     })
