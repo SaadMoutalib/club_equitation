@@ -25,8 +25,8 @@ db.sequelize.sync({
   //force: true,
 });
 
-app.get("/public/user", express.static(path.join(__dirname, "/public/user")));
-app.get("/public/client", express.static(path.join(__dirname, "/public/client")));
+app.get("/public/user", express.static(path.join(__dirname, "public/user")));
+app.get("/public/client", express.static(path.join(__dirname, "public/client")));
 
 require("./routes/user.routes")(app);
 require("./routes/client.routes")(app);
