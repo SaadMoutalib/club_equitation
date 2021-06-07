@@ -14,13 +14,27 @@ exports.findAll = (req, res) => {
     });
 };
 
+exports.findUserTasks = (req, res) => {
+    Task.findAll({
+        where: { UserID: req.params.id },
+        order: [['startDate','DESC']]
+    }).then((data)=>{
+        res.send(data);
+    }).catch((err)=>{
+        res.status(500).send({
+            message: err.message,
+          });
+    });
+}
+
 exports.create = (req, res) => {
     if (
       !req.body.startDate ||
       !req.body.durationMinut ||
       !req.body.title ||
       !req.body.detail ||
-      !req.body.comments
+      !req.body.comments ||
+      !req.body.UserID
     ) {
       return res.status(400).send({
         message: "No field should be empty !",
@@ -31,7 +45,8 @@ exports.create = (req, res) => {
         startDate:req.body.startDate,
         durationMinut:req.body.durationMinut,
         title:req.body.title,
-        detail:req.body.detail
+        detail:req.body.detail,
+        UserID:req.body.UserID
     };
   
     Task.create(task)

@@ -62,7 +62,6 @@ module.exports = (sequelize) => {
     userphoto: {
         type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: 'default.jpg',
         field: "userphoto",
     },
     contractDate: {

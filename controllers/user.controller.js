@@ -79,11 +79,11 @@ exports.create = (req, res) => {
                 displayColor:req.body.displayColor
             };
 
-            if(req.file){
-                const url = req.protocol + "://" + req.get("host");
-                const image = url + "/public/user/" + req.file.filename;
-                
-                user.userphoto = image;
+            const url = req.protocol + "://" + req.get("host");
+            if(!req.file){
+              user.userphoto = url + "/public/user/default.jpg";
+            }else{
+              user.userphoto = url + "/public/user/" + req.file.filename;
             }
             
             User.create(user)

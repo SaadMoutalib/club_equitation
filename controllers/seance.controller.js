@@ -17,7 +17,9 @@ exports.findAll = (req, res) => {
 
 exports.findClientSeance = (req, res) => {
     Seance.findAll({
-        where: { ClientID: req.params.id }
+        where: { ClientID: req.params.id },
+        order: [['startDate','DESC']],
+        include: [{ model: db.clients }, {model:db.users}]
     }).then((data)=>{
         res.send(data);
     }).catch((err)=>{
@@ -27,9 +29,32 @@ exports.findClientSeance = (req, res) => {
     });
 }
 
+exports.setIsDone = (req, res) => {
+    const id = req.params.id;
+    
+    Seance.findByPk(id)
+    .then((data)=>{
+        data.update({
+            isDone : data.isDone == 1 ? 0 : 1
+        }).then((data)=>{
+            res.send(data);
+        }).catch((err)=>{
+            res.status(500).send({
+                message: err.message,
+            });
+        });
+    }).catch((err)=>{
+        res.status(500).send({
+            message: err.message,
+        });
+    });
+}
+
 exports.findMonitorSeance = (req, res) => {
     Seance.findAll({
-        where: { MonitorID: req.params.id }
+        where: { MonitorID: req.params.id },
+        order: [['startDate','DESC']],
+        include: [{ model: db.clients }, {model:db.users}]
     }).then((data)=>{
         res.send(data);
     }).catch((err)=>{

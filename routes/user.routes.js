@@ -39,7 +39,6 @@ module.exports = (app) => {
   router.get("/user", authenticate, users.findOne);
   router.patch("/update/:id", authenticate, users.update);
   router.delete("/delete/:id", authenticate, users.delete);
-
   app.use("/api/users", router);
 };
   

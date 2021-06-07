@@ -4,7 +4,8 @@ module.exports = (sequelize) => {
   const attributes = {
     taskID: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
       field: "taskID",
     },
     startDate: {
@@ -31,7 +32,7 @@ module.exports = (sequelize) => {
     },
     isDone: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
         field: "isDone",
     }
   };

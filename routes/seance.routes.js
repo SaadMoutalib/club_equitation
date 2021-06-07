@@ -10,6 +10,7 @@ module.exports = (app) => {
     router.get("/monitor/:id", authenticate, seances.findClientSeance);
     router.patch("/update/:id", authenticate, seances.update);
     router.delete("/delete/:id", authenticate, seances.delete);
+    router.patch("/isdone/:id", authenticate, seances.setIsDone);
 
     app.use("/api/seances", router);
 };

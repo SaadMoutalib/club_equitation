@@ -41,5 +41,14 @@ db.clients.hasMany(db.seances, {
     foreignKey: "ClientID"
 });
 
+db.tasks.belongsTo(db.users, {
+  foreignKey: "UserID"});
+
+db.seances.belongsTo(db.users, {
+  foreignKey: "MonitorID"});
+
+db.seances.belongsTo(db.clients,{
+    foreignKey: "ClientID"});
+
 module.exports = db;
 global.db = db;

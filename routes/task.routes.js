@@ -8,6 +8,6 @@ module.exports = (app) => {
     router.get("/:id", authenticate, tasks.findOne);
     router.patch("/update/:id", authenticate, tasks.update);
     router.delete("/delete/:id", authenticate, tasks.delete);
-
+    router.get("/user/:id", authenticate, tasks.findUserTasks);
     app.use("/api/tasks", router);
 };
