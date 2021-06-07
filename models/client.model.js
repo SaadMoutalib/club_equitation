@@ -98,7 +98,7 @@ module.exports = (sequelize) => {
     comment: "",
     indexes: [],
   };
-  const ClientModel = sequelize.define("client_model", attributes, options);
+  const ClientModel = sequelize.define("client", attributes, options);
 
   return ClientModel;
 };

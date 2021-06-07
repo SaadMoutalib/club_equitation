@@ -41,7 +41,7 @@ module.exports = (sequelize) => {
     comment: "",
     indexes: [],
   };
-  const TaskModel = sequelize.define("task_model", attributes, options);
+  const TaskModel = sequelize.define("task", attributes, options);
 
   return TaskModel;
 };

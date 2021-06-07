@@ -47,7 +47,7 @@ module.exports = (sequelize) => {
     comment: "",
     indexes: [],
   };
-  const SeanceModel = sequelize.define("seance_model", attributes, options);
+  const SeanceModel = sequelize.define("seance", attributes, options);
 
   return SeanceModel;
 };
