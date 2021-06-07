@@ -17,8 +17,20 @@ exports.login = (req, res) => {
             const result = bcrypt.compareSync(req.body.userPasswd, data.userPasswd);
             data.password = undefined;
             if (result) {
-            const jsontoken = jwt.sign({ id: data._id }, config.secret, {
+            const jsontoken = jwt.sign({ id: data.userID }, config.secret, {
                 expiresIn: "1h",
+            });
+            data.update({
+              sessionToken : jsontoken,
+              lastLoginTime : sequelize.literal('CURRENT_TIMESTAMP')
+            }).then((data)=>{
+              res.status(200).send({
+                message: "Session changed"
+              });
+            }).catch((err)=>{
+              res.status(500).send({
+                message: err.message,
+              });
             });
             return res.status(200).send({
                 message: "Authentifié avec succès",
