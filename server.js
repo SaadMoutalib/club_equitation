@@ -23,6 +23,8 @@ app.use(cors());
 
 app.use(morgan("dev"));
 
+app.enable('trust proxy');
+
 db.sequelize.sync({
   //force: true,
 });

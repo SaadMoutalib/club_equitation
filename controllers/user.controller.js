@@ -79,7 +79,7 @@ exports.create = (req, res) => {
                 displayColor:req.body.displayColor
             };
 
-            const url = req.secure + "://" + req.get("host");
+            const url = req.protocol + "://" + req.get("host");
             if(!req.file){
               user.userphoto = url + "/public/user/default.jpg";
             }else{

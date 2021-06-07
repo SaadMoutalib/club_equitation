@@ -84,7 +84,7 @@ exports.create = (req, res) => {
                 clientPhone:req.body.clientPhone,
                 priceRate:req.body.priceRate
             };
-            const url = req.secure + "://" + req.get("host");
+            const url = req.protocol + "://" + req.get("host");
             if(req.file){ 
               client.photo = url + "/public/client/" + req.file.filename;
             }else{
