@@ -2,7 +2,6 @@ const db = require("../models/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const config = require("../config/auth.config.js");
-const { json } = require("sequelize/types");
 const Client = db.clients;
 
 exports.login = (req, res) => {
@@ -18,29 +17,19 @@ exports.login = (req, res) => {
             const result = bcrypt.compareSync(req.body.passwd, data.passwd);
             data.passwd = undefined;
             if (result) {
-              const jsontoken = jwt.sign({ id: data.clientID }, config.secret, {
-              expiresIn: "1h",
-              });
-              data.update({
-                sessionToken : jsontoken
-              }).then((data)=>{
-                res.status(200).send({
-                  message: "Session changed"
+                const jsontoken = jwt.sign({ id: data.clientID }, config.secret, {
+                expiresIn: "1h",
                 });
-              }).catch((err)=>{
-                res.status(500).send({
-                  message: err.message,
+                
+                return res.status(200).send({
+                    message: "Authentifié avec succès",
+                    user: data,
+                    token: jsontoken,
                 });
-              });
-              return res.status(200).send({
-                  message: "Authentifié avec succès",
-                  user: data,
-                  token: jsontoken,
-              });
             } else {
-              return res.status(401).send({
+            return res.status(401).send({
                 message: "Mot de passe incorrect",
-              });
+            });
             }
         }
     })
