@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require("cors");
+const path = require("path");
 const morgan = require("morgan");
 const db = require("./models/db");
 const dotenv = require("dotenv");
@@ -34,4 +35,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () =>
     console.log(`Server started on PORT ${PORT}...`)
 )
+
+app.get("/", express.static(path.join(__dirname, "./public")));
+
 
