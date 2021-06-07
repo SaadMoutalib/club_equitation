@@ -36,6 +36,7 @@ app.listen(PORT, () =>
     console.log(`Server started on PORT ${PORT}...`)
 )
 
-app.get("/", express.static(path.join(__dirname, "./public")));
+app.get("/public/user", express.static(path.join(__dirname, "./public/user")));
+app.get("/public/client", express.static(path.join(__dirname, "./public/client")));
 
 
